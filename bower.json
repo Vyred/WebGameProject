@@ -1,0 +1,28 @@
+{
+  "name": "createjs-template",
+  "description": "CreateJs Project Template",
+  "main": "",
+  "keywords": [
+    "CreateJs"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/Vyred/Week1Webgame",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "Scripts/lib",
+    "test",
+    "tests"
+  ],
+  "authors": [
+    "Matt"
+  ],
+  "private": true,
+  "dependencies": {
+    "EaselJS": "^0.8.2",
+    "TweenJS": "^0.6.2",
+    "SoundJS": "^0.6.2",
+    "PreloadJS": "^0.6.2"
+  }
+}
