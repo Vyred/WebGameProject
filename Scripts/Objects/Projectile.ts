@@ -58,14 +58,6 @@ module objects {
             this._reset();
         }
 
-        /////////////////////////////
-        //Straight flying Projectile
-        /////////////////////////////
-        public straightFlying():void{
-          let retVect2 = Vector2.forward(this.rotation);
-          this.x += retVect2.x;//this.SPEED/5;
-          this.y += retVect2.y;//this.SPEED/5;
-        }
 
         public update():void {
             this.position = new Vector2(this.x, this.y);

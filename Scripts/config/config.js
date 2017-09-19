@@ -5,7 +5,7 @@ var config;
         function Scene() {
         }
         Scene.STARTSCREEN = 0;
-        Scene.FIELD = 1;
+        Scene.BATTLEFIELD = 1;
         Scene.DEATHSCREEN = 2;
         return Scene;
     }());

@@ -60,7 +60,6 @@ module objects {
             this._isColliding = newState;
         }
 
-
         get enabled():boolean{
             return this._enabled;
         }

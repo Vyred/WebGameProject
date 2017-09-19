@@ -26,7 +26,7 @@ var objects;
             var returnVector2 = new Vector2(0, 0);
             returnVector2.x = Math.cos(rot);
             returnVector2.y = Math.sin(rot);
-            console.log(Math.sqrt(returnVector2.x * returnVector2.x) + (returnVector2.y * returnVector2.y));
+            // console.log(Math.sqrt(returnVector2.x*returnVector2.x) + (returnVector2.y*returnVector2.y));
             //console.log("x:" + returnVector2.x + "y"+ returnVector2.y);                     
             return (returnVector2);
         };

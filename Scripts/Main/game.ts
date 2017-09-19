@@ -1,7 +1,7 @@
 
 namespace core {
 
-
+    export let deltaTime : number;
     export let stage:createjs.Stage;
     export let canvas: HTMLElement = document.getElementById("canvas");
     export let assets: createjs.LoadQueue;
@@ -13,9 +13,12 @@ namespace core {
     let field: scenes.Field;
     let deathScreen: scenes.DeathScreen;
 
+
+
    let assetData: objects.Asset[] = [
       { id: "grassBackground", src: "../../Assets/images/grass.png" },
-      { id: "wizardBlue", src: "../../Assets/images/wizardBase1.gif" }
+      { id: "wizardBlue", src: "../../Assets/images/gunner1.gif" },
+      { id: "m9", src: "../../Assets/images/gun.gif" }
   ];
 
   function preload(): void {
@@ -31,19 +34,20 @@ function init(): void {
   stage.enableMouseOver(20);
   createjs.Ticker.framerate = 60;
   createjs.Ticker.on("tick", gameLoop);
-
-  scene = config.Scene.FIELD; console.log("Game Started..5.");
+  
+  scene = config.Scene.BATTLEFIELD; console.log("Game Started..5.");
   changeScene();
 }
 
 // Main Game Loop function that handles what happens each "tick" or frame
 function gameLoop(event: createjs.Event): void {
 
-  currentScene.Update(); 
   
+ 
   // redraw/refresh stage every frame
-  stage.update();
-}
+      currentScene.Update(); 
+      stage.update();
+  }
 
  //   function Start() {
   //    console.log("Game Started..rip.");
@@ -59,10 +63,11 @@ function gameLoop(event: createjs.Event): void {
     function Update() {
       //helloLabel.rotation += 5;
      
-      stage.update();
-     console.log("Game Started..mainuu.");
+     //stage.update();
+     //console.log("Game Started..mainuu.");
     }
-  
+
+    
     function Main() {
       console.log("Game Started...");
   
@@ -79,7 +84,7 @@ function gameLoop(event: createjs.Event): void {
            //   currentScene = intro;
            //   console.log("Starting INTRO Scene");
            //   break;
-          case config.Scene.FIELD:
+          case config.Scene.BATTLEFIELD:
               // show the PLAY scene
               console.log("YUU");
               stage.removeAllChildren();

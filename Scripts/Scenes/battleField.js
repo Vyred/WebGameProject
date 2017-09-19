@@ -12,10 +12,6 @@ var scenes;
 (function (scenes) {
     var Field = /** @class */ (function (_super) {
         __extends(Field, _super);
-        /**
-         * Creates an instance of Menu.
-         *
-         */
         function Field() {
             return _super.call(this) || this;
         }
@@ -24,34 +20,58 @@ var scenes;
         //    this._scoreLabel.text = "Score: " + core.score;
         //}
         /**
-         *
+         * start
          */
         Field.prototype.Start = function () {
             // ocean object
+            this._gameState = "play";
             this._floor = new objects.Floor("grassBackground");
             this.addChild(this._floor);
-            // player object
             this._player1 = new objects.Player1("wizardBlue");
-            this.addChild(this._player1);
+            //this.addChild(this._player1);
+            this._playerContainer = new createjs.Container();
+            this._playerContainer.addChild(this._player1);
+            this.addChild(this._playerContainer);
+            // player object
             // include a collision managers
             this._collision = new managers.Collision();
             // add this scene to the global scene container
             core.stage.addChild(this);
         };
         Field.prototype.Update = function () {
-            this._floor.update();
-            this._player1.update();
+            if (this._player1.gameState === "play") {
+                this._floor.update();
+                this._player1.update();
+            }
+            else if (this._player1.gameState === "pause") {
+                console.log("paused");
+            }
+            else if (this._player1.gameState === "inventory") {
+            }
+            //this._playerContainer.;
             //console.log("Game Started...field");
             //this._collision.check(this._player1, this._island);
         };
-        // EVENT HANDLERS ++++++++++++++++
+        // EVENT HANDLERS ///////////////////////
         Field.prototype._startButtonClick = function (event) {
             // Switch the scene
             core.scene = config.Scene.DEATHSCREEN;
             core.changeScene();
         };
+        Object.defineProperty(Field.prototype, "gameState", {
+            /////////////////////////////////////////////////////////
+            //get setters
+            get: function () {
+                return this._gameState;
+            },
+            set: function (newState) {
+                this._gameState = newState;
+            },
+            enumerable: true,
+            configurable: true
+        });
         return Field;
     }(objects.Scene));
     scenes.Field = Field;
 })(scenes || (scenes = {}));
-//# sourceMappingURL=field.js.map
+//# sourceMappingURL=battleField.js.map

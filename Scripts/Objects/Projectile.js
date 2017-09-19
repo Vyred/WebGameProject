@@ -12,7 +12,7 @@ var objects;
 (function (objects) {
     var Projectile = /** @class */ (function (_super) {
         __extends(Projectile, _super);
-        function Projectile(imageString) {
+        function Projectile(imageString, startingRotation, startingPosition) {
             var _this = _super.call(this, imageString) || this;
             _this.start();
             return _this;
@@ -51,12 +51,6 @@ var objects;
         // PUBLIC METHODS +++++++++++++++++++++++++++++++++++++++++++++
         Projectile.prototype.start = function () {
             this._reset();
-        };
-        /////////////////////////////
-        //Straight flying Projectile
-        /////////////////////////////
-        Projectile.prototype.straightFlying = function () {
-            this.direction = this.rotation;
         };
         Projectile.prototype.update = function () {
             this.position = new objects.Vector2(this.x, this.y);

@@ -3,7 +3,7 @@
     // Scene Constants
     export class Scene {
         public static STARTSCREEN: number = 0;
-        public static FIELD: number = 1;
+        public static BATTLEFIELD: number = 1;
         public static DEATHSCREEN: number = 2;
     }
     

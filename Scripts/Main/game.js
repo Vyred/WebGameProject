@@ -7,7 +7,8 @@ var core;
     var deathScreen;
     var assetData = [
         { id: "grassBackground", src: "../../Assets/images/grass.png" },
-        { id: "wizardBlue", src: "../../Assets/images/wizardBase1.gif" }
+        { id: "wizardBlue", src: "../../Assets/images/gunner1.gif" },
+        { id: "m9", src: "../../Assets/images/gun.gif" }
     ];
     function preload() {
         core.assets = new createjs.LoadQueue(true);
@@ -21,14 +22,14 @@ var core;
         core.stage.enableMouseOver(20);
         createjs.Ticker.framerate = 60;
         createjs.Ticker.on("tick", gameLoop);
-        core.scene = config.Scene.FIELD;
+        core.scene = config.Scene.BATTLEFIELD;
         console.log("Game Started..5.");
         changeScene();
     }
     // Main Game Loop function that handles what happens each "tick" or frame
     function gameLoop(event) {
-        currentScene.Update();
         // redraw/refresh stage every frame
+        currentScene.Update();
         core.stage.update();
     }
     //   function Start() {
@@ -42,8 +43,8 @@ var core;
     // }
     function Update() {
         //helloLabel.rotation += 5;
-        core.stage.update();
-        console.log("Game Started..mainuu.");
+        //stage.update();
+        //console.log("Game Started..mainuu.");
     }
     function Main() {
         console.log("Game Started...");
@@ -59,7 +60,7 @@ var core;
             //   currentScene = intro;
             //   console.log("Starting INTRO Scene");
             //   break;
-            case config.Scene.FIELD:
+            case config.Scene.BATTLEFIELD:
                 // show the PLAY scene
                 console.log("YUU");
                 core.stage.removeAllChildren();
