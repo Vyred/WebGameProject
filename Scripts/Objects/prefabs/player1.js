@@ -67,6 +67,8 @@ var objects;
             this.x = core.canvas.clientWidth / 2;
             this.y = core.canvas.clientHeight / 2;
             this.gameState = "play";
+            this._inventory = new objects.menus.Inventory();
+            //this.playerContainer.addChild(this._inventory);
             KEYCODE_LEFT = 65;
             KEYCODE_RIGHT = 68;
             KEYCODE_UP = 87;
@@ -197,6 +199,7 @@ var objects;
             }
         };
         Object.defineProperty(Player1.prototype, "gameState", {
+            //my tips for sleep would be a fan(white noise and a lower body temperature help), clear your head, maybe exercise, don't drink coffee,  a cup of water   
             ////////////////////////////////////////
             ////get setters/////////////////////////
             get: function () {
@@ -204,6 +207,16 @@ var objects;
             },
             set: function (newState) {
                 _gameState = newState;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(Player1.prototype, "inventory", {
+            get: function () {
+                return this._inventory;
+            },
+            set: function (newState) {
+                this._inventory = newState;
             },
             enumerable: true,
             configurable: true

@@ -14,7 +14,9 @@ module objects {
 
     export class Player1 extends objects.GameObject {
         
-       playerContainer : createjs.Container;
+        playerContainer : createjs.Container;
+        _inventory: objects.menus.Inventory;
+        _equipped: objects.Items.BaseItem[];
 
         currentStamina : number;
         maxStamina : number;
@@ -26,7 +28,7 @@ module objects {
       
         //private _gameState : string = "play";
         
-    
+        
 
         //window.onkeyup = keyUpHandler;
         //window.onkeydown = keyDownHandler;
@@ -38,11 +40,13 @@ module objects {
             this.maxSPEED = 10;
             
             this.playerContainer = new createjs.Container();
+            
             this.playerContainer.addChild();
             this.playerContainer.x = this.x;
             this.playerContainer.y = this.y;
             this.maxStamina = 100;
             this.currentStamina = this.maxStamina;
+            
             this.start();
         }
       
@@ -80,6 +84,10 @@ module objects {
             this.x = core.canvas.clientWidth/2;
             this.y = core.canvas.clientHeight/2;
             this.gameState = "play";
+            this._inventory = new objects.menus.Inventory();
+            //this.playerContainer.addChild(this._inventory);
+
+
             KEYCODE_LEFT = 65;
             KEYCODE_RIGHT = 68;
             KEYCODE_UP = 87;
@@ -131,6 +139,8 @@ module objects {
            
         }
 
+
+
         public keyDownHandler(event)
         {    
          switch(event.keyCode)
@@ -177,6 +187,15 @@ module objects {
         set gameState(newState:string) {
             _gameState = newState;
         }
+
+        get inventory():objects.menus.Inventory {
+            return this._inventory;
+        }
+
+        set inventory(newState:objects.menus.Inventory) {
+            this._inventory = newState;
+        }
+        //_inventory: objects.menus.Inventory;
     }
 
     function move()

@@ -15,7 +15,7 @@ module managers {
 
         public check(player: objects.GameObject, other: objects.GameObject) {
             //check to see if object is colliding
-
+            
             if (objects.Vector2.distance(player.position, other.position) < (player.halfHeight + other.halfHeight)) {
                 if (!other.isColliding) {
                     other.isColliding = true;

@@ -65,12 +65,16 @@ module objects {
         }
         set enabled(newState:boolean){
             this._enabled = newState;
+            if (this.enabled == false){
+                this._purgatory();
+            }
+           
         }
 
         //Private Method
         private _purgatory():void {
-            this.x = config.Screen.WIDTH * 444;
-            this.y = config.Screen.HEIGHT * 444; 
+            this.x = config.Screen.WIDTH * 10;
+            this.y = config.Screen.HEIGHT * 10; 
             this.enabled = false;           
         }
 

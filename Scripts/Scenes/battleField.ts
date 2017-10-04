@@ -9,6 +9,10 @@ module scenes {
         private _livesLabel: objects.Label;
         private _engineSound: createjs.AbstractSoundInstance;
 
+        private _oldTime : number;
+        private _deltaTime : number; 
+        //delta time is = current time - old time
+
         //private _pauseButton: boolean;
 
         private _gameState: string;
@@ -27,17 +31,35 @@ module scenes {
          * start
          */
         public Start(): void {
-            // ocean object
+            //Time objects
+            this._oldTime = 0;
+            this._deltaTime = 0;
+
             this._gameState = "play";
-            
+            console.log("random ex:" + (Math.random() * (100 - 0) + 0));
             this._floor = new objects.Floor("grassBackground");
             this.addChild(this._floor);
+           
+            //core.stage.numChildren+1
 
             this._player1 = new objects.Player1("wizardBlue");
             //this.addChild(this._player1);
             this._playerContainer = new createjs.Container();
-            this._playerContainer.addChild(this._player1);
-            this.addChild(this._playerContainer);
+
+            
+
+           
+              this.addChild(this._playerContainer);
+              this.addChild(this._player1._inventory.inventoryContainer);
+              this._playerContainer.addChild(this._player1);
+            /////////////////////////////////////////////////////////////////////////////
+            //index order is very important.////////////////////////////////////////////
+            //the lower numbers get rendered first and therefore things that get rendered later
+            //should have the appropriate core.stage.numchildren-x
+           
+            this.setChildIndex(this._floor, 0);
+            this.setChildIndex(this._playerContainer, 1);
+            this.setChildIndex(this._player1._inventory.inventoryContainer, 2);
             // player object
 
 
@@ -55,9 +77,17 @@ module scenes {
         }
 
         public Update(): void {
+            
             if (this._player1.gameState === "play") {
+                
+                this.deltaTime = Math.floor(Date.now() / 1000) - this._oldTime;
+                this._oldTime = Math.floor(Date.now() / 1000);
+
                 this._floor.update();
                 this._player1.update();
+            
+                console.log("Current time:" + Math.floor(Date.now()));
+                
             } else if (this._player1.gameState === "pause") {
                 console.log("paused");
             } else if (this._player1.gameState === "inventory") {
@@ -84,6 +114,14 @@ module scenes {
 
         set gameState(newState:string) {
             this._gameState = newState;
+        }
+        //////////////////////////////////////////////////////
+        get deltaTime():number {
+            return this._deltaTime;
+        }
+
+        set deltaTime(newState:number) {
+            this._deltaTime = newState;
         }
     }
 }

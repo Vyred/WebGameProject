@@ -12,11 +12,25 @@ var objects;
 (function (objects) {
     var forwardMovingProjectile = /** @class */ (function (_super) {
         __extends(forwardMovingProjectile, _super);
-        function forwardMovingProjectile(imageString, startingRotation, startingPosition) {
-            var _this = _super.call(this, imageString, startingRotation, startingPosition) || this;
+        /*
+        @description image, speed, starting position, starting rotation,
+        */
+        function forwardMovingProjectile(imageString, startingRotation, startingPosition, speed) {
+            var _this = _super.call(this, imageString, speed, startingPosition, startingRotation) || this;
             _this.start();
             return _this;
         }
+        forwardMovingProjectile.prototype.update = function () {
+            if (this.enabled == true) {
+                this.projectileAction(this.speed);
+            }
+        };
+        forwardMovingProjectile.prototype.projectileTimer = function () {
+            //after 3 seconds the bullet should go back to purgatory
+        };
+        forwardMovingProjectile.prototype.projectileAction = function (speed) {
+            this.straightFlying(speed);
+        };
         //makes the projectile move forward
         forwardMovingProjectile.prototype.straightFlying = function (speed) {
             var retVect2 = objects.Vector2.forward(this.rotation);

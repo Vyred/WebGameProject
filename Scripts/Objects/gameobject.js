@@ -90,14 +90,17 @@ var objects;
             },
             set: function (newState) {
                 this._enabled = newState;
+                if (this.enabled == true) {
+                    this._purgatory();
+                }
             },
             enumerable: true,
             configurable: true
         });
         //Private Method
         GameObject.prototype._purgatory = function () {
-            this.x = config.Screen.WIDTH * 444;
-            this.y = config.Screen.HEIGHT * 444;
+            this.x = config.Screen.WIDTH * 10;
+            this.y = config.Screen.HEIGHT * 10;
             this.enabled = false;
         };
         GameObject.prototype._initialize = function (imageString) {

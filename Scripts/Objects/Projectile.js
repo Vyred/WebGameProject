@@ -12,17 +12,17 @@ var objects;
 (function (objects) {
     var Projectile = /** @class */ (function (_super) {
         __extends(Projectile, _super);
-        function Projectile(imageString, startingRotation, startingPosition) {
+        //@description Image, Speed, Starting Position, Starting Rotation
+        function Projectile(imageString, startingRotation, startingPosition, speed) {
             var _this = _super.call(this, imageString) || this;
+            _this.speed = speed;
+            _this.startingPosition = startingPosition;
+            _this.startingRotation = startingRotation;
             _this.start();
             return _this;
         }
         // PRIVATE METHODS ++++++++++++++++++++++++++++++++++++++++++++
         //private _purgatory():void {
-        //    this.x = config.Screen.WIDTH * 666;
-        //    this.y = config.Screen.HEIGHT * 666;
-        //    this.currentSpeed = 0;
-        //     
         //}
         Projectile.prototype._reset = function () {
             //this._dy = Math.floor((Math.random() * 5) + 5); // vertical speed
@@ -35,29 +35,70 @@ var objects;
          * This method checks if the object has reached its boundaries
         **/
         Projectile.prototype._checkBounds = function () {
-            if (this.y >= (config.Screen.HEIGHT * 1.5 + (this.height * 0.5))) {
-                this._reset();
+            if (this.y >= (config.Screen.HEIGHT * 2 + (this.height * 0.5))) {
+                this.enabled = false;
             }
-            if (this.y <= (0 - (config.Screen.HEIGHT * 0.5) + (this.height * 0.5))) {
-                this._reset();
+            if (this.y <= (0 - (config.Screen.HEIGHT) + (this.height * 0.5))) {
+                this.enabled = false;
             }
-            if (this.x >= (config.Screen.WIDTH * 1.5 + (this.width * 0.5))) {
-                this._reset();
+            if (this.x >= (config.Screen.WIDTH * 2 + (this.width * 0.5))) {
+                this.enabled = false;
             }
-            if (this.x <= (0 - (config.Screen.WIDTH * 0.5) + (this.width * 0.5))) {
-                this._reset();
+            if (this.x <= (0 - (config.Screen.WIDTH) + (this.width * 0.5))) {
+                this.enabled = false;
             }
+        };
+        //in case the weapon is either timed (grenade)
+        Projectile.prototype._checkTimer = function () {
         };
         // PUBLIC METHODS +++++++++++++++++++++++++++++++++++++++++++++
         Projectile.prototype.start = function () {
-            this._reset();
+            this.enabled = true;
+            //this._reset();
         };
         Projectile.prototype.update = function () {
-            this.position = new objects.Vector2(this.x, this.y);
-            this.y += this._dy;
-            this.x += this._dx;
-            this._checkBounds();
+            //this.position = new Vector2(this.x, this.y);
+            // this.y += this._dy;
+            //this.x += this._dx;
+            if (this.enabled == true) {
+                //this.projectileAction();
+                this._checkBounds();
+            }
         };
+        Object.defineProperty(Projectile.prototype, "speed", {
+            ///////////////////////////////////////////////
+            //Get Setters
+            get: function () {
+                return this._speed;
+            },
+            set: function (newState) {
+                this._speed = newState;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(Projectile.prototype, "startingPosition", {
+            ////////////////////////////////////////////
+            get: function () {
+                return this._startingPosition;
+            },
+            set: function (newState) {
+                this._startingPosition = newState;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(Projectile.prototype, "startingRotation", {
+            /////////////////////////////////////////////
+            get: function () {
+                return this._startingRotation;
+            },
+            set: function (newState) {
+                this._startingRotation = newState;
+            },
+            enumerable: true,
+            configurable: true
+        });
         return Projectile;
     }(objects.GameObject));
     objects.Projectile = Projectile;

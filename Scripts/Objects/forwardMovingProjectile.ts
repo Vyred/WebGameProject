@@ -1,17 +1,28 @@
-module objects {
-    
-       export class forwardMovingProjectile extends objects.Projectile {
-       
-        constructor(imageString: string, startingRotation:number, startingPosition:Vector2) {
-            super(imageString, startingRotation, startingPosition);
+module objects.physics {
 
-            this.start();
+    export class forwardMovingProjectile extends objects.physics.Projectile {
+
+
+
+        /*
+        @description image, speed, starting position, starting rotation,  
+        */
+       public projectileTimer() {
+            //after 3 seconds the bullet should go back to purgatory
+            
         }
-            //makes the projectile move forward
-            public straightFlying(speed: number):void{
-            let retVect2 = Vector2.forward(this.rotation);
-            this.x += retVect2.x * speed;
-            this.y += retVect2.y * speed;
-          }
-       }
+
+        public projectileAction(speed: number, affectedObject:objects.GameObject): void {
+            this.straightFlying(speed, affectedObject);
+        }
+
+        //makes the projectile move forward
+        public straightFlying(speed: number, affectedObject:objects.GameObject): void {
+            let retVect2 = Vector2.forward(affectedObject.rotation);
+            affectedObject.x += retVect2.x * speed;
+            affectedObject.y += retVect2.y * speed;
+        }
+
+        
     }
+}
